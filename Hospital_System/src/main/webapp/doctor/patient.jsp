@@ -12,9 +12,66 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <%@include file="../component/allcss.jsp"%>
-<style type="text/css">
+<style>
+
 .paint-card {
-	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #f9f9f9, #ffffff); 
+    border-radius: 15px;
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); 
+}
+
+
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table thead {
+    background: linear-gradient(135deg, #0077b6, #00b4d8); 
+    color: white;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.table tbody tr {
+    transition: 0.3s ease-in-out;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(0, 183, 255, 0.1); 
+}
+
+
+.btn-success {
+    background: linear-gradient(135deg, #00b894, #0984e3); 
+    border: none;
+    padding: 8px 12px;
+    transition: 0.3s ease-in-out;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #0984e3, #00b894);
+    transform: scale(1.05);
+}
+
+.btn-sm.disabled {
+    background: #b2bec3 !important;
+    cursor: not-allowed;
+}
+
+
+@media screen and (max-width: 768px) {
+    .table {
+        font-size: 0.9rem;
+    }
+    .btn {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
 }
 </style>
 </head>
@@ -93,5 +150,7 @@
 			</div>
 		</div>
 	</div>
+	<br>
+	<%@include file="../component/footer.jsp" %>
 </body>
 </html>

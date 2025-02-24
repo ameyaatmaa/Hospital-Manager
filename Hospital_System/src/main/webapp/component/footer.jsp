@@ -1,13 +1,18 @@
 <style>
+/* Footer Styling */
 footer {
-    background: #228B22;  /* Dark Green */
+    background: linear-gradient(135deg, #0077b6, #48cae4); /* Matching Navbar Colors */
     color: white;
     text-align: center;
-    padding: 20px 0;
-    font-size: 14px;
-    border-top: 3px solid #1e7e1e; /* Subtle separation line */
+    padding: 30px 0;
+    font-size: 15px;
+    position: relative;
+    overflow: hidden;
+    border-top: 4px solid #006494; /* Subtle separation line */
+    transition: all 0.3s ease-in-out;
 }
 
+/* Footer container */
 .footer-container {
     display: flex;
     justify-content: space-between;
@@ -15,57 +20,71 @@ footer {
     flex-wrap: wrap;
     max-width: 1100px;
     margin: auto;
-    padding: 10px 20px;
+    padding: 15px 20px;
 }
 
+/* Footer sections */
 .footer-section {
     flex: 1;
-    min-width: 220px;
-    margin: 5px;
-    text-align: left;
+    min-width: 250px;
+    margin: 10px;
+    text-align: center;
 }
 
 .footer-section h3 {
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 8px;
-    color: #c2f0c2; /* Light Green */
+    color: #e0f7ff; /* Light pastel text */
 }
 
+/* Contact Details */
 .footer-section p {
     margin: 4px 0;
+    opacity: 0.9;
 }
 
+/* Social Icons */
 .footer-section .social {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .footer-section .social a {
     color: white;
-    font-size: 30px;  /* Larger icon size */
-    margin: 0 20px;   /* Increased space between icons */
-    transition: color 0.3s ease;
+    font-size: 42px;  /* Increased Icon Size */
+    margin: 0 20px;    /* More Spacing Between Icons */
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .footer-section .social a:hover {
-    color: #c2f0c2;
+    color: #e0f7ff;
+    transform: scale(1.3);
 }
 
+/* Footer Bottom */
 .footer-bottom {
-    background: #1e7e1e;
-    padding: 8px 0;
-    font-size: 12px;
+    background: #006494;
+    padding: 12px 0;
+    font-size: 14px;
     margin-top: 20px;
     text-align: center;
-    color: #e0f5e0;
-    border-top: 1px solid #c2f0c2;
+    color: #e0f7ff;
+    border-top: 2px solid #e0f7ff;
+    transition: all 0.3s ease-in-out;
 }
 
+/* Hover Effect */
+footer:hover {
+    background: linear-gradient(135deg, #006494, #3bb3d3);
+}
+
+/* Responsive Design */
 @media screen and (max-width: 768px) {
     .footer-container {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
     }
     .footer-section {
         margin-bottom: 15px;
@@ -76,7 +95,7 @@ footer {
 <footer>
     <div class="footer-container">
         <div class="footer-section about">
-            <p>Providing world-class medical services with expert doctors and modern facilities.</p>
+            <p>Delivering world-class medical services with expert doctors and advanced facilities.</p>
         </div>
 
         <div class="footer-section contact">
@@ -96,6 +115,6 @@ footer {
     </div>
 
     <div class="footer-bottom">
-        <p>&copy; 2025 Hospital Name. All Rights Reserved.</p>
+        <p>&copy; 2025 ameyaatmaa. All Rights Reserved.</p>
     </div>
 </footer>

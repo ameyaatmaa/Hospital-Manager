@@ -13,10 +13,51 @@
 
 <%@include file="../component/allcss.jsp" %>
 
-<style type="text/css">
+<style>
+/* General Card Styling */
 .point-card {
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-       
+    background: rgba(255, 255, 255, 0.2); /* Light Transparent Background */
+    backdrop-filter: blur(10px); /* Glassmorphism Effect */
+    border: 2px solid rgba(255, 255, 255, 0.2); 
+    border-radius: 15px;
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover Effect */
+.point-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Icons */
+.card-body i {
+    font-size: 3.5rem; /* Bigger Icons */
+    transition: 0.3s ease-in-out;
+}
+
+/* Icon Colors */
+.icon-doctor { color: #0077b6; } /* Blue */
+.icon-appointments { color: #d00000; } /* Red */
+.icon-reports { color: #ffba08; } /* Yellow */
+
+/* Card Text */
+.card-body p {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Background Gradients */
+.bg-doctor {
+    background: linear-gradient(135deg, #0077b6, #48cae4); /* Blue Gradient */
+}
+.bg-appointments {
+    background: linear-gradient(135deg, #d00000, #ff4d4d); /* Red Gradient */
+}
+.bg-reports {
+    background: linear-gradient(135deg, #ffba08, #ffdd57); /* Yellow Gradient */
 }
 </style>
 
@@ -35,43 +76,45 @@ DoctorDAO dao = new DoctorDAO(DBConnect.getConn());
 Doctor d = (Doctor) session.getAttribute("doctorObj"); 
 %>
 
+<!-- Updated Cards -->
 <div class="container mt-5">
-    <div class="row row-cols-1 row-cols-md-4 g-4 text-center">
+    <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
 
         <!-- Doctor Card -->
         <div class="col">
-            <div class="card shadow-sm border-0 p-4 text-center h-100">
+            <div class="card point-card bg-doctor h-100">
                 <div class="card-body">
-                    <i class="fas fa-user-md fa-3x text-primary"></i>
-                    <p class="fs-5 fw-bold mt-3">Doctor <br> <%=dao.countDoctor() %></p>
+                    <i class="fas fa-user-md icon-doctor"></i>
+                    <p>Doctor <br> <%=dao.countDoctor() %></p>
                 </div>
             </div>
         </div>
 
-       
-
         <!-- Appointments Card -->
         <div class="col">
-            <div class="card shadow-sm border-0 p-4 text-center h-100">
+            <div class="card point-card bg-appointments h-100">
                 <div class="card-body">
-                    <i class="fas fa-calendar-check fa-3x text-danger"></i>
-                    <p class="fs-5 fw-bold mt-3">Appointments <br> <%= dao.countAppointmentByDoctorId(d.getId()) %> </p>
+                    <i class="fas fa-calendar-check icon-appointments"></i>
+                    <p>Appointments <br> <%= dao.countAppointmentByDoctorId(d.getId()) %></p>
                 </div>
             </div>
         </div>
 
         <!-- Reports Card -->
         <div class="col">
-            <div class="card shadow-sm border-0 p-4 text-center h-100">
+            <div class="card point-card bg-reports h-100">
                 <div class="card-body">
-                    <i class="fas fa-file-medical fa-3x text-warning"></i>
-                    <p class="fs-5 fw-bold mt-3">Reports</p>
+                    <i class="fas fa-file-medical icon-reports"></i>
+                    <p>Reports</p>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
-
+<br>
+<br>
+<br>
+<%@include file="../component/footer.jsp" %>
 </body>
 </html>

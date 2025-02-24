@@ -10,20 +10,144 @@
 
 <%@include file="../component/allcss.jsp" %>
 <style>
+/* General Styling */
+body {
+    background: #f8f9fa; /* Light background */
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+/* Container Styling */
+.container {
+    max-width: 1100px;
+}
+
+/* Dashboard Heading */
+p.text-center.fs-3 {
+    font-weight: bold;
+    color: #0077b6; /* Light blue color for title */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Success & Error Messages */
+.text-centre.text-success {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.text-centre.text-danger {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Point Cards */
 .point-card {
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease-in-out;
-    border-radius: 10px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
+
+/* Hover Effect */
 .point-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Icons */
+.point-card i {
+    transition: transform 0.3s ease-in-out;
+}
+
+.point-card:hover i {
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* Card Text */
+.point-card p {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Colors for Icons */
+.text-primary {
+    color: #0077b6 !important;
+}
+
+.text-danger {
+    color: #e63946 !important;
+}
+
+.text-warning {
+    color: #ffb703 !important;
+}
+
+.text-info {
+    color: #219ebc !important;
+}
+
+/* Modal Styling */
+.modal-content {
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    background: #0077b6;
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.modal-footer {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+/* Buttons */
+.btn-primary {
+    background: #0077b6;
+    border: none;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.btn-primary:hover {
+    background: #005f86;
     transform: scale(1.05);
 }
-.container {
-    max-width: 1100px;
+
+.btn-secondary {
+    background: #adb5bd;
+    border: none;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.btn-secondary:hover {
+    background: #868e96;
+    transform: scale(1.05);
+}
+
+/* Form Input */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    transition: border 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #0077b6;
+    box-shadow: 0 0 8px rgba(0, 119, 182, 0.3);
+}
+
 }
 </style>
 

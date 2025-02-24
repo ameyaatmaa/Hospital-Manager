@@ -3,9 +3,11 @@ package com.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.db.DBConnect;
 import com.entity.Doctor;
 import com.entity.User;
 
@@ -150,36 +152,52 @@ public class DoctorDAO {
 		
 		return f;
 	}
-	
-	public boolean deleteDoctor(int id) {
-		boolean f=false;
-		
-		try {
-			String sql="delete from doctor where id=?";
-			PreparedStatement ps=conn.prepareStatement(sql);
-			ps.setInt(1, id);
-			
-			int i=ps.executeUpdate();
-			
-			if(i==1) {
-				f=true;
-				
-			}
-				
-			
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-		
-		
-		
-		return f;
+	public boolean deleteDoctor(int doctorId) {
+	    Connection con = null;
+	    PreparedStatement pstmt1 = null;
+	    PreparedStatement pstmt2 = null;
+
+	    try {
+	        con = DBConnect.getConn();
+	        con.setAutoCommit(false); // Start transaction
+
+	        // Step 1: Delete related appointments
+	        String deleteAppointmentsSQL = "DELETE FROM appointment WHERE docid = ?";
+	        pstmt1 = con.prepareStatement(deleteAppointmentsSQL);
+	        pstmt1.setInt(1, doctorId);
+	        pstmt1.executeUpdate();
+
+	        // Step 2: Delete doctor
+	        String deleteDoctorSQL = "DELETE FROM doctor WHERE id = ?";
+	        pstmt2 = con.prepareStatement(deleteDoctorSQL);
+	        pstmt2.setInt(1, doctorId);
+	        int affectedRows = pstmt2.executeUpdate();
+
+	        con.commit(); // Commit transaction
+
+	        return affectedRows > 0; // Return true if doctor was deleted successfully
+
+	    } catch (Exception e) {
+	        try {
+	            if (con != null) {
+	                con.rollback(); // Rollback transaction in case of failure
+	            }
+	        } catch (SQLException rollbackEx) {
+	            rollbackEx.printStackTrace();
+	        }
+	        e.printStackTrace();
+	        return false;
+	    } finally {
+	        try {
+	            if (pstmt1 != null) pstmt1.close();
+	            if (pstmt2 != null) pstmt2.close();
+	            if (con != null) con.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	}
-	
-	
+
 	
 	public Doctor login(String email,String password) {
 		Doctor d= null;

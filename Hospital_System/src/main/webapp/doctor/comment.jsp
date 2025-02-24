@@ -11,18 +11,112 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <style type="text/css">
-.paint-card {
-	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+/* Background Image Overlay */
+.backImg {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url("../img/hospital.jpg");
+    height: 20vh;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.backImg {
-	background: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)),
-		url("../img/hospital.jpg");
-	height: 20vh;
-	width: 100%;
-	background-size: cover;
-	background-repeat: no-repeat;
+/* Card Styling */
+.paint-card {
+    background: linear-gradient(135deg, #ffffff, #f9f9f9); /* Soft gradient */
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
 }
+
+/* Form Styling */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #0077b6;
+    transition: all 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #00b4d8;
+    box-shadow: 0 0 8px rgba(0, 180, 216, 0.5);
+}
+
+/* Textarea Styling */
+textarea {
+    border-radius: 8px;
+    border: 1px solid #0077b6;
+    transition: all 0.3s ease-in-out;
+}
+
+textarea:focus {
+    border-color: #00b4d8;
+    box-shadow: 0 0 8px rgba(0, 180, 216, 0.5);
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #0077b6, #00b4d8);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #00b4d8, #0077b6);
+    transform: scale(1.05);
+}
+
+/* Card Hover Effect */
+.paint-card:hover {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
+    transform: translateY(-3px);
+}
+
+/* Animated Heading */
+.fs-4 {
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+}
+
+.fs-4::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #0077b6, #00b4d8);
+    transition: all 0.3s ease-in-out;
+    margin-top: 5px;
+}
+
+.fs-4:hover::after {
+    width: 120%;
+}
+
+/* Responsive Fixes */
+@media screen and (max-width: 768px) {
+    .paint-card {
+        padding: 15px;
+    }
+
+    .fs-4 {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+}
+
 </style>
 <%@include file="../component/allcss.jsp"%>
 </head>
@@ -88,5 +182,9 @@
 			</div>
 		</div>
 	</div>
+	<br> <br>
+	
+<%@include file="../component/footer.jsp" %>
+
 </body>
 </html>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@page isELIgnored="false"%>    
 <%@page import="java.util.List"%>
@@ -8,159 +7,193 @@
 <%@page import="com.entity.Specialist"%>
 <%@page import="com.dao.DoctorDAO"%>
 <%@page import="com.entity.Doctor"%>    
-    
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Appointment Form</title>
+<title>Book an Appointment</title>
 <%@include file="component/allcss.jsp" %>
 
 <style>
-.point-card {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    background: #fff;
-    padding: 20px;
+/* Main Container */
+.appointment-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 85vh;
+    gap: 40px;
 }
 
-.point-card h3 {
+/* Left Side - Image */
+.appointment-image {
+    width: 45%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Right Side - Appointment Form */
+.appointment-card {
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    background: #f0f9ff; /* Light Soothing Blue */
+    padding: 30px;
+    width: 50%;
+    color: #333;
+}
+
+/* Form Title */
+.appointment-card h3 {
     font-weight: bold;
-    color: #007bff;
     text-align: center;
     margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #0077b6;
+}
+
+/* Form Inputs */
+.appointment-card .form-control, .appointment-card .form-select {
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #bde0fe; /* Light Blue Border */
+}
+
+/* Button Styling */
+.appointment-card .btn-primary {
+    background-color: #72bcd4; /* Soothing Pastel Blue */
+    border: none;
+    border-radius: 25px;
+    padding: 10px;
+    font-size: 1.1rem;
+    transition: 0.3s;
+    width: 100%;
+    color: white;
+}
+
+.appointment-card .btn-primary:hover {
+    background-color: #5fa8d3; /* Slightly Darker Blue */
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .appointment-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .appointment-image {
+        width: 90%;
+    }
+    .appointment-card {
+        width: 90%;
+    }
 }
 </style>
 </head>
 <body>
-<%@include file="component/navbar.jsp" %>
 
-<div class="container mt-5">
-    <div class="row justify-content-end">
-        <div class="col-md-6">
-            <div class="card point-card">
-                <h3>Book an Appointment</h3>
-                
-                  <c:if test="${not empty errorMsg}">
-                        <p class="text-centre text-danger fs-3">${errorMsg}</p>
-                       <c:remove var="errorMsg" scope="session"/>
-                        </c:if>
-                        
-                         <c:if test="${not empty succMsg}">
-                        <p class="text-centre text-success fs-3">${succMsg}</p>
-                       <c:remove var="succMsg" scope="session"/>
-                        </c:if>
-                
-                
-                <form action="addAppointment" method="post">
-                   <input type="hidden" name="userid" value="${userObj.id }">
-                   
-                    <div class="row mb-3">
-                        <label class="col-md-4 col-form-label">Full Name</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" name="fullName" required>
-                        </div>
-                    </div>
+<%@include file="component/navbar.jsp" %> <br>
 
-                    <div class="row mb-3">
-                        <label class="col-md-4 col-form-label">Gender</label>
-                        <div class="col-md-8">
-                            <select class="form-select" name="gender" required>
-                                <option value="">Select Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                    </div>
+<div class="container appointment-container">
+    
+    <!-- Left Side - Image -->
+    <img src="img/sinless.jpg" alt="Appointment Image" class="appointment-image">
 
-                    <div class="row mb-3">
-                        <label class="col-md-4 col-form-label">Age</label>
-                        <div class="col-md-8">
-                            <input type="number" class="form-control" name="age" required>
-                        </div>
-                    </div>
+    <!-- Right Side - Appointment Form -->
+    <div class="appointment-card">
+        <h3>Book an Appointment</h3>
 
-                    <div class="row mb-3">
-                        <label class="col-md-4 col-form-label">Appointment Date</label>
-                        <div class="col-md-8">
-                            <input type="date" class="form-control" name="appointmentDate" required>
-                        </div>
-                    </div>
+        <!-- Success and Error Messages -->
+        <c:if test="${not empty errorMsg}">
+            <p class="text-center text-danger fs-5">${errorMsg}</p>
+            <c:remove var="errorMsg" scope="session"/>
+        </c:if>
 
-                    <div class="row mb-3">
-                        <label class="col-md-4 col-form-label">Email</label>
-                        <div class="col-md-8">
-                            <input type="email" class="form-control" name="email" required>
-                        </div>
-                    </div>
+        <c:if test="${not empty succMsg}">
+            <p class="text-center text-success fs-5">${succMsg}</p>
+            <c:remove var="succMsg" scope="session"/>
+        </c:if>
 
-                    <div class="row mb-3">
-                        <label class="col-md-4 col-form-label">Phone No</label>
-                        <div class="col-md-8">
-                            <input type="tel" class="form-control" name="phoneNo" required>
-                        </div>
-                    </div>
+        <!-- Appointment Form -->
+        <form action="addAppointment" method="post">
+            <input type="hidden" name="userid" value="${userObj.id}">
 
-                    <div class="row mb-3">
-                        <label class="col-md-4 col-form-label">Diseases</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" name="diseases">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label class="col-md-4 col-form-label">Select Doctor</label>
-                        <div class="col-md-8">
-                            <select class="form-select" name="doctor" required>
-                        <option value="">--select--</option>
-                        
-                        <%  DoctorDAO dao= new DoctorDAO(DBConnect.getConn());
-						 List<Doctor> list=	dao.getAllDoctor();
-                        for(Doctor d:list)
-                        {%>
-                        
-                        <option value="<%= d.getId() %>"><%= d.getFullName() %> (<%= d.getSpecialist() %>)</option>
-
-                        
-                        	
-                       <% }
-                        
-                        
-                        
-                        
-                        
-                        %>
-                        
-                        
-                        
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Full Address</label>
-                        <textarea class="form-control" name="address" rows="3" required></textarea>
-                    </div>
-                    
-                    <c:if test="${empty userObj }">
-                    <a href="user_login.jsp" class="btn btn-primary w-100">Book Appointment</a>
-                    
-                    </c:if>
-                    
-                     <c:if test="${ not empty userObj }">
-                    
-                      <button type="submit" class="btn btn-primary w-100">Book Appointment</button>
-                    </c:if>
-                    
-                    
-
-                  
-                </form>
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" name="fullName" required>
             </div>
-        </div>
+
+            <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <select class="form-select" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Age</label>
+                <input type="number" class="form-control" name="age" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Appointment Date</label>
+                <input type="date" class="form-control" name="appointmentDate" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Phone No</label>
+                <input type="tel" class="form-control" name="phoneNo" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Diseases</label>
+                <input type="text" class="form-control" name="diseases">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Select Doctor</label>
+                <select class="form-select" name="doctor" required>
+                    <option value="">-- Select --</option>
+                    <% 
+                        DoctorDAO dao = new DoctorDAO(DBConnect.getConn());
+                        List<Doctor> list = dao.getAllDoctor();
+                        for (Doctor d : list) { 
+                    %>
+                        <option value="<%= d.getId() %>"><%= d.getFullName() %> (<%= d.getSpecialist() %>)</option>
+                    <% } %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Full Address</label>
+                <textarea class="form-control" name="address" rows="3" required></textarea>
+            </div>
+
+            <!-- Button Based on Login Status -->
+            <c:if test="${empty userObj}">
+                <a href="user_login.jsp" class="btn btn-primary">Book Appointment</a>
+            </c:if>
+
+            <c:if test="${not empty userObj}">
+                <button type="submit" class="btn btn-primary">Book Appointment</button>
+            </c:if>
+        </form>
     </div>
+
 </div>
 
+<br>
+<%@include file="component/footer.jsp" %>
 </body>
 </html>

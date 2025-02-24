@@ -13,9 +13,92 @@
 <title>Insert title here</title>
 <%@include file="../component/allcss.jsp"%>
 <style type="text/css">
-.paint-card {
-	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+/* General Page Styling */
+body {
+    background: linear-gradient(to right, #f7f9fc, #eef2f3);
+    font-family: 'Poppins', sans-serif;
 }
+
+/* Card Styling */
+.paint-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.paint-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Table Container */
+.table-container {
+    max-height: 500px;
+    overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling */
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.table th {
+    background-color: #4A90E2;
+    color: white;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.table td {
+    background-color: white;
+    color: #2c3e50;
+    padding: 12px;
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+/* Table Row Hover Effect */
+.table-hover tbody tr:hover {
+    background-color: #E3F2FD;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Status Column Styling */
+td:last-child {
+    font-weight: bold;
+}
+
+/* Pending Status */
+td:contains("Pending") {
+    color: #d9534f;
+}
+
+/* Approved Status */
+td:contains("Approved") {
+    color: #28a745;
+}
+
+/* Declined Status */
+td:contains("Declined") {
+    color: #dc3545;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .paint-card {
+        margin-bottom: 20px;
+    }
+
+    .table-container {
+        max-height: 300px;
+    }
+}
+
 </style>
 </head>
 <body>
