@@ -29,7 +29,19 @@
                 <div class="card point-card">
                     <div class="card-body">
                         <p class="fs-4 text-center">User Login</p>
-                        <form action="#" method="post">
+                       
+                       <c:if test="${not empty succMsg}">
+                        <p class="text-centre text-success fs-3">${succMsg}</p>
+                       <c:remove var="succMsg" scope="session"/>
+                        </c:if>
+                        
+                         <c:if test="${not empty errorMsg}">
+                        <p class="text-centre text-danger fs-3">${errorMsg}</p>
+                       <c:remove var="errorMsg" scope="session"/>
+                        </c:if>
+                       
+                       
+                        <form action="userLogin" method="post">
                             <div class="mb-3">
                                 <label class="form-label">Email address</label>
                                 <input required name="email" type="email" class="form-control">

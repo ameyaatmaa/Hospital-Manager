@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="com.db.DBConnect" %>	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Index Page</title>
 <%@include file="component/allcss.jsp" %>
-<%@include file="component/navbar.jsp" %>
+
 
 
 <style>
@@ -140,6 +142,14 @@
 </style>
 </head>
 <body>
+
+<%@include file="component/navbar.jsp" %>
+
+<% Connection conn = DBConnect.getConn(); 
+
+out.print(conn);
+
+%>
 
 <!-- Carousel -->
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
