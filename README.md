@@ -27,5 +27,4 @@ Medico is a full-stack web-based hospital management system built using Java tec
   - Schedule appointments
   - View reports and analytics
 
-## 📁 Project Structure
 
